@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script type = "text/javascript"  src = "jquery/jquery-1.12.0.min.js"></script>
+  	<script>
+	  function showErrorMsg(str)
+	  {
+	  	str = "<font color=#FF0000>"+str+"</font>";
+	  	$("#login_error_div").html(str);
+	  }
+	
+	  function validateForm() {
+	      var username = document.forms["login_form"]["username"].value;
+	      var password = document.forms["login_form"]["password"].value;
+	      if (username == null || username == "") {
+	          showErrorMsg("Username cannot be empty");
+	          return false;
+	      }
+		  
+	      showErrorMsg("");
+	      return true;
+	  }
+	  
+	  $(document).ready(function() {
+		  
+	  
+		  $("#login_submit").click(function() {
+			//alert("new project submit");
+			
+			var username1 =  $("#username").val();
+			//var project_name1 = document.forms["create_project"]["project_name"].value;
+			var password1 = $("#password").val();
+			   	
+		   	if (validateForm())
+		       {
+					$.post("/process_login", {
+		           			username: username1,
+		           			password: password1 
+		           			}, function(data) {
+		           				    var returnResult = JSON.stringify(data);
+		           				    var result = JSON.parse(returnResult);
+		              				//alert(returnResult);
+		           				    //alert(result[0].username);
+		           				    //alert(returnResult[0].username);
+		              				if (result[0]!=null)
+		              				{
+		              					$("#login_error_div").html("Login successfully");
+			              				$('#login_form')[0].reset(); // To reset form fields
+		              				}
+		              				else
+		              				{
+		              					showErrorMsg("Failed to login");
+			              				$('#login_form')[0].reset(); // To reset form fields	
+		              				}
+		              				
+		              			
+		            	  });
+		       }
+				       
+			});
+	  });
+  </script>
+  </head>
+  
+  <body>
+  <H1>Login</H1>
+  <div id="login_error_div"></div><br>
+  <form id="login_form" method="POST" action="">
+    <table>
+      <tr>
+      <td>Username: </td><td><input name="username" id="username" type="text" size="50"/></td>
+      </tr>
+      <tr>
+      <td>Password: </td><td><input name="password" id="password" type="password" size="50"/></td>
+      </tr>
+      <tr>
+      <td colspan="2"><hr></td><td></td>
+      </tr>
+      <tr>
+      <td colspan="2" align="right"><p><input id="login_submit" type="button" value="Login"/></p></td><td></td>
+      </tr>  
+    </table>
+  </form>
+  </body>
+
+</html>

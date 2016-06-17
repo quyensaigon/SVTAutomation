@@ -1,0 +1,372 @@
+<html>
+<head>
+<title>SVT Dashboard</title>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<LINK REL="stylesheet" HREF="css/main.css" TYPE="text/css" MEDIA="SCREEN">
+<script type = "text/javascript"  src = "jquery/jquery-1.12.0.min.js"></script>
+<script type = "text/javascript" src = "https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<style>
+table {
+        
+    font-size: 12px;
+    font-family: Arial;
+    
+}
+table.border, th, td.border {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+
+</style>
+<script>
+previousTabIndex = 0; 
+</script>
+</head>
+<body topmargin="0" leftmargin="0" marginHeight="0" marginWidth="0">
+<script>
+(function($)
+{
+    var oldHtml = $.fn.html;
+    $.fn.html = function()
+    {
+        var ret = oldHtml.apply(this, arguments);
+
+        //trigger your event.
+        this.trigger("change");
+
+        return ret;
+    };
+})(jQuery);
+
+
+</script>
+
+<!-- menu -->
+
+<table width="100%">
+<tr>
+	<td width="100%" height="30px" align="right" bgcolor="#000000">
+	<table bgcolor="#000000" cellpadding="0" cellspacing="0" border="0" width="20%" height="100%" ID="Table4">
+		<tr>
+			<td align="right" bgcolor="#000000" onmouseover="javascript:style.backgroundColor='#000000'"
+											onmouseout="javascript:style.backgroundColor='#000000'"><img src="images/transdot.gif" width="0" height="1"><a href="index.php" class="leftmenu">Dash board</a><img src="images/transdot.gif" width="0" height="1"></td>
+			<td align="right" bgcolor="#000000" onmouseover="javascript:style.backgroundColor='#000000'"
+											onmouseout="javascript:style.backgroundColor='#000000'"><a href="admin.php" class="leftmenu">Admin</a><img src="images/transdot.gif" width="20" height="1"></td>
+		</tr>
+	</table>
+	</td>
+</tr>
+</table>
+
+<!-- end menu -->
+
+<!-- tab -->
+<div id="tabstemp">
+</div>
+<script>
+
+function time_sleep_until (timestamp) {
+	  // http://kevin.vanzonneveld.net
+	  // +   original by: Brett Zamir (http://brett-zamir.me)
+	  // %          note: For study purposes. Current implementation could lock up the user's browser.
+	  // %          note: Expects a timestamp in seconds, so DO NOT pass in a JavaScript timestamp which are in milliseconds (e.g., new Date()) or otherwise the function will lock up the browser 1000 times longer than probably intended.
+	  // %          note: Consider using setTimeout() instead.
+	  // *     example 1: time_sleep_until(1233146501) // delays until the time indicated by the given timestamp is reached
+	  // *     returns 1: true
+	  var currentDate = new Date();
+	  while (new Date()-currentDate < timestamp) {}
+	  return true;
+	}
+	
+function showTabs()
+{
+   
+   //setup_info = document.getElementById("lst_setup_info").value;
+   //alert("Setup Info is " + setup_info);
+   if (window.XMLHttpRequest) {                                                                   
+    // code for IE7+, Firefox, Chrome, Opera, Safari                                             
+    xmlhttp=new XMLHttpRequest();                                                                
+  } else { // code for IE6, IE5                                                                  
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");                                              
+  }                                                                                              
+  xmlhttp.onreadystatechange=function() {                                                        
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) { 
+      //alert("quyen oi hoi");	
+      document.getElementById("tabstemp").innerHTML=xmlhttp.responseText;
+      $( "#tabs" ).tabs();
+      //document.getElementById("tabs").innerHTML="<html><body>chan qua</body></html>";
+      //$('#summary_table').DataTable();
+      
+      $( "#tabs" ).tabs();
+      $( "#tabs" ).tabs({ active: 0 });
+      //var activeTabIdx = $('#tabs').tabs('option','active');
+      var activeTabIdx = 0;
+      previousTabIndex = activeTabIdx;
+      //alert ("active Tab content ID se la " + activeTabIdx);
+     
+      //project_id = $("#fragment-"+activeTabIdx).attr('value');
+      project_id = $("#fragment-0").attr('value');
+      //time_sleep_until(8000);
+      //$("#fragment-"+activeTabIdx).html("<div id=\"divSetupInfo\"/></div><table><tr><td valign='top'><div id=\"divTestSummary\"/></div></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td valign=\"top\"><br/><img name=\"chart\" id=\"chart\" src=\"\"></td></tr></table><br><div id=\"divResultDetails\"/></div></table>"); 
+      //alert ("project_id se la " + project_id);
+      $("#fragment-0").html("<div id=\"divSetupInfo\"/></div><table><tr><td valign='top'><div id=\"divTestSummary\"/></div></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td valign=\"top\"><br/><img name=\"chart\" id=\"chart\" src=\"\"></td></tr></table><br><div id=\"divResultDetails\"/></div></table>"); 
+      //alert(project_id);
+      initView(project_id);
+      
+    }                                                                                            
+  }                                                                                              
+  //xmlhttp.open("GET","temp_getuser.php?str="+str,true);                                        
+  xmlhttp.open("GET","/showtabs",true);                              
+  xmlhttp.send();
+  
+}
+
+/*
+$(docuemnt).load(function())
+{
+	showTabs(); 
+};
+*/
+
+$(document).ready(function() {
+    // menu
+     $('.nav li').hover(
+      function () { //appearing on hover
+        $('ul', this).fadeIn();
+      },
+      function () { //disappearing on hover
+        $('ul', this).fadeOut();
+      }
+    );    
+    // end menu
+    showTabs();
+    /*
+    $( "#tabs" ).tabs();
+    $( "#tabs" ).tabs({ active: 0 });
+    
+    
+    //var activeTabIdx = $('#tabs').tabs('option','active');
+    var activeTabIdx = 0;
+    previousTabIndex = activeTabIdx;
+    //alert ("active Tab content ID se la " + activeTabIdx);
+   
+    //project_id = $("#fragment-"+activeTabIdx).attr('value');
+    project_id = $("#fragment-0").attr('value');
+    //time_sleep_until(8000);
+    //$("#fragment-"+activeTabIdx).html("<div id=\"divSetupInfo\"/></div><table><tr><td valign='top'><div id=\"divTestSummary\"/></div></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td valign=\"top\"><br/><img name=\"chart\" id=\"chart\" src=\"\"></td></tr></table><br><div id=\"divResultDetails\"/></div></table>"); 
+    //alert ("project_id se la " + project_id);
+    $("#fragment-0").html("<div id=\"divSetupInfo\"/></div><table><tr><td valign='top'><div id=\"divTestSummary\"/></div></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td valign=\"top\"><br/><img name=\"chart\" id=\"chart\" src=\"\"></td></tr></table><br><div id=\"divResultDetails\"/></div></table>"); 
+    alert(project_id);
+    initView(project_id);
+    
+    */
+    	
+});   
+
+ $(function() {
+	
+    $( "#tabs" ).tabs();
+    
+    $('#tabs').click('select', function (event, ui) {
+          //alert("tab click " + ui); 
+          var activeTabIdx = $('#tabs').tabs('option','active');
+
+	  previousTabIndex = activeTabIdx; 	
+
+          //project_id = $("#fragment-"+activeTabIdx).attr('value');
+          //$("#fragment-"+previousTabIndex).html("");
+          //$("#fragment-"+activeTabIdx).html("<div id=\"divSetupInfo\"/></div><table><tr><td valign='top'><div id=\"divTestSummary\"/></div></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td valign=\"top\"><br/><img name=\"chart\" id=\"chart\" src=\"\"></td></tr></table><br><div id=\"divResultDetails\"/></div></table>");
+	  //alert ("project_id after clicking se la " + project_id);
+   
+	  //initView(project_id);
+    });
+  });
+
+
+
+function tabClick(activeTabIdx)
+{
+	//alert("real tab click");
+        //var activeTabIdx = $('#tabs').tabs('option','active');
+	project_id = $("#"+activeTabIdx).attr('value');
+        //alert("project Id la " + project_id);
+        $("#fragment-"+previousTabIndex).html("");
+        $("#"+activeTabIdx).html("<div id=\"divSetupInfo\"/></div><table><tr><td valign='top'><div id=\"divTestSummary\"/></div></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td valign=\"top\"><br/><img name=\"chart\" id=\"chart\" src=\"\"></td></tr></table><br><div id=\"divResultDetails\"/></div></table>");
+	  //alert ("project_id after clicking se la " + project_id);
+   
+	initView(project_id);	
+}
+
+$("#tabs").tabs({
+  beforeActivate: function (event, ui) {
+    //alert("tab ID se la " + ui.newPanel.attr('id'));
+    //$project_id = ui.newPanel.attr('id'); 	
+  }
+});
+
+
+
+                                                                                         
+function showResultDetails(str) {
+$('#summary_table').DataTable();                                                                
+  if (str=="") {                                                                                 
+    document.getElementById("divResultDetails").innerHTML="";                                    
+    return;                                                                                      
+  }                                                                                              
+  if (window.XMLHttpRequest) {                                                                   
+    // code for IE7+, Firefox, Chrome, Opera, Safari                                             
+    xmlhttp=new XMLHttpRequest();                                                                
+  } else { // code for IE6, IE5                                                                  
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");                                              
+  }                                                                                              
+  xmlhttp.onreadystatechange=function() {                                                        
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {                                          
+      document.getElementById("divResultDetails").innerHTML=xmlhttp.responseText;                
+    }                                                                                            
+  }                                                                                              
+  //xmlhttp.open("GET","temp_getuser.php?str="+str,true);                                        
+  xmlhttp.open("GET","get_result_details?test_date=" + str,true);                              
+  xmlhttp.send();                                                                                
+};
+
+
+function showTestSummary()
+{
+   
+   setup_info = document.getElementById("lst_setup_info").value;
+   //alert("Setup Info is " + setup_info);
+   if (window.XMLHttpRequest) {                                                                   
+    // code for IE7+, Firefox, Chrome, Opera, Safari                                             
+    xmlhttp=new XMLHttpRequest();                                                                
+  } else { // code for IE6, IE5                                                                  
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");                                              
+  }                                                                                              
+  xmlhttp.onreadystatechange=function() {                                                        
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {                                          
+      document.getElementById("divTestSummary").innerHTML=xmlhttp.responseText;
+      $('#summary_table').DataTable();                
+    }                                                                                            
+  }                                                                                              
+  //xmlhttp.open("GET","temp_getuser.php?str="+str,true);                                        
+  xmlhttp.open("GET","get_test_summary?setup_id=" + setup_info,true);                              
+  xmlhttp.send();
+  
+}
+
+function showGraph()
+{
+   setup_info = document.getElementById("lst_setup_info").value;
+   document.getElementById("chart").src = "http://158.85.175.84/svtd/graph.php?setup_id=" + setup_info;
+}
+
+function blankoutResultDetails()
+{
+	document.getElementById("divResultDetails").innerHTML="";
+}
+
+function initView(project_id)
+{
+	//showSetupInfo(project_id);
+        //showTestSummary();
+	//showGraph();
+	//blankoutResultDetails();
+
+	//setup_info = document.getElementById("lst_setup_info").value;
+   	//alert("Setup Info is " + setup_info);
+   	if (window.XMLHttpRequest) {                                                                   
+    		// code for IE7+, Firefox, Chrome, Opera, Safari                                             
+    		xmlhttp=new XMLHttpRequest();                                                                
+  	} 
+	else { // code for IE6, IE5                                                                  
+    		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");                                              
+  	}                                                                                              
+  	xmlhttp.onreadystatechange=function() {                                                        
+    		if (xmlhttp.readyState==4 && xmlhttp.status==200) {                                          
+      			document.getElementById("divSetupInfo").innerHTML=xmlhttp.responseText;
+      			showTestSummary();
+			showGraph();
+			blankoutResultDetails();
+                
+    		}                                                                                            
+  	}                                                                                              
+  // tam mark
+  //alert(project_id);
+  xmlhttp.open("GET","/get_setup_info?project_id=" + project_id,true);
+  //xmlhttp.open("GET","login.html",true);
+  xmlhttp.send();       	
+}
+
+
+function updateView()
+{
+	
+        showTestSummary();
+	//showGraph();
+	blankoutResultDetails();       	
+}
+
+
+function updateTabContent()
+{
+   updateView();	
+}
+
+function showSetupInfo(project_id)
+{
+   //setup_info = document.getElementById("lst_setup_info").value;
+   //alert("Setup Info is " + setup_info);
+   if (window.XMLHttpRequest) {                                                                   
+    // code for IE7+, Firefox, Chrome, Opera, Safari                                             
+    xmlhttp=new XMLHttpRequest();                                                                
+  } else { // code for IE6, IE5                                                                  
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");                                              
+  }                                                                                              
+  xmlhttp.onreadystatechange=function() {                                                        
+    //if (xmlhttp.readyState==4 && xmlhttp.status==200) {                                          
+      document.getElementById("divSetupInfo").innerHTML=xmlhttp.responseText;
+      //$('#summary_table').DataTable();                
+    //}                                                                                            
+  }                                                                                              
+                                          
+  xmlhttp.open("GET","get_setup_info.php?project_id=" + project_id,true);                              
+  xmlhttp.send();
+}
+
+function showGraphEx()
+{
+   alert("show graph");
+   setup_info = document.getElementById("lst_setup_info").value;
+   alert("Setup Info is " + setup_info);
+   var newImage = new Image();
+   newImage.src = "graph.php?setup_id=1";
+   var count = 0;
+   function updateImage()
+   {
+     if(newImage.complete) {
+        document.getElementById("chart").src = newImage.src;
+        newImage = new Image();
+        newImage.src = "graph.php?setup_id=1";
+     }
+     setTimeout(updateImage, 1000);
+   }	
+   	
+}
+
+function changeCurrentTab_To_Active(tabIndex)
+{
+    var activeTabIdx = $('#tabs').tabs('option','active');
+    
+    //alert ("active Tab content ID se la " + activeTabIdx); 
+    project_id = $("#fragment-"+activeTabIdx).attr('value');
+} 
+                                                                                                        
+</script> 
+
+
+</body>
+</html>
+

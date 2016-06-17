@@ -1,0 +1,29 @@
+{
+	"name": "NodejsStarterApp",
+	"version": "0.0.1",
+    "private": true,
+	"scripts": {
+		"start": "node app.js"
+	},
+	"dependencies": {
+		
+		"body-parser": "^1.13.3",	
+		"express": "4.13.x",
+		"cfenv": "1.0.x",
+		"multer": "^1.0.3",
+		"mysql": "^2.5.4",
+		"ejs": "^2.3.4",
+		"method-override": "^2.3.5",
+		"morgan": "^1.6.1",
+		"request": "^2.61.0",
+		"twilio": "^2.3.0",
+		"unirest": "^0.4.2",
+		"php-express": "^0.0.3",
+		"moment":"^2.13.0"
+		
+	},
+	"repository": {},
+	"engines": {
+		"node": "4.2.x"
+	} 
+}

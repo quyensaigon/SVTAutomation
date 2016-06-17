@@ -1,0 +1,256 @@
+/* style.css
+ * This file provides css styles.
+ */
+
+/* Set the background color of the page.*/
+
+
+
+A.browlink, A:visited.browlink,A:link.browlink,A:hover.browlink{
+    font-size: 12px; 
+	 font-family: tahoma,sans-serif;
+	 FONT-WEIGHT: bold;
+	 color: #9F4010;
+}
+A.blacklink, A:visited.blacklink,A:link.blacklink {
+	text-decoration: none;
+	font-family: tahoma,sans-serif;
+	font-size: 12px;
+	color: #000000;
+	font-style: normal;
+}
+A:hover.blacklink {
+	text-decoration: underline;
+	font-family: tahoma,sans-serif;
+	font-size: 12px;
+	color: #000000;
+	font-style: normal;
+}
+A.pinklink, A:visited.pinklink,A:link.pinklink {
+	text-decoration: none;
+	font-family: tahoma,sans-serif;
+	font-size: 12px;
+	color: #DC8095;
+	font-style: normal;
+}
+A:hover.pinklink {
+	text-decoration: underline;
+	font-family: tahoma,sans-serif;
+	font-size: 12px;
+	color: #000000;
+	font-style: normal;
+}
+
+A.pinklink1,A:link.pinklink1 {
+	text-decoration: none;
+	font-family: tahoma,sans-serif;
+	font-size: 12px;
+	color: #DC8095;
+	font-style: normal;
+}
+A:hover.pinklink1 {
+	text-decoration: underline;
+	font-family: tahoma,sans-serif;
+	font-size: 12px;
+	color: #9f410d;
+	font-style: normal;
+}
+A:visited.pinklink1 {
+	text-decoration: none;
+	font-family: tahoma,sans-serif;
+	font-size: 12px;
+	color: #9f410d;
+	font-style: normal;
+}
+
+input { font-size: 12px; font-family: tahoma,sans-serif; }
+radio { font-size: 12px; font-family: tahoma,sans-serif; }
+select { font-size: 12px; font-family: tahoma,sans-serif; }
+textarea { font-size: 12px; font-family: tahoma,sans-serif; }
+checkbox { font-size: 12px; font-family: tahoma,sans-serif; }
+p,td,th {font-size: 12px; font-family: tahoma,sans-serif;}
+.menu {font-size: 12px; font-family: tahoma,sans-serif;FONT-WEIGHT: normal;}
+.caption {font-size: 12px; font-family: tahoma,sans-serif;FONT-WEIGHT: bold}
+.buttononwhite {font-family:tahoma,sans-serif;
+        font-size:12px;
+		  background: #F8E1E9;
+		  border-bottom: 1px solid #EBABB6;
+		  border-right: 1px solid #EBABB6;
+		  border-left: 1px solid #FFFFFF;
+		  border-top:1px solid #FFFFFF;
+		  color: #9f410d;
+		  text-decoration:none;
+		  font: bolder;
+		  height: 20;
+}
+.buttononwhitepink {font-family:tahoma,sans-serif;
+        font-size:12px;
+		  background: #f6c7cf;
+		  border-bottom: 1px solid #2b2e00;
+		  border-right: 1px solid #2b2e00;
+		  border-left: 1px solid #ffffff;
+		  border-top:1px solid #ffffff;
+		  color:#7A2D03;
+		  text-decoration:none;
+		  font: bolder;
+		  height: 20;
+		}
+.errmsg {
+    font-family:tahoma,sans-serif;
+	font-size:12px;
+	font-weight: bold; 
+	color:#FF0000
+	}
+.textfield { font-size: 9pt; font-family: arial,verdana, helvetica, sans-serif; vertical-align: middle;border-width : 1;
+                font-weight : bold;
+    border-style : solid;
+    border-color : #7B2E02;
+    BACKGROUND-REPEAT: repeat;
+    BACKGROUND-POSITION: 0% 50%;
+    BACKGROUND-ATTACHMENT: scroll;
+    BACKGROUND: #ffffff;
+    color: #9f410d;
+}
+.captiononmainpage{
+    font-family:tahoma,sans-serif;
+	 font-size:12px;
+	 color: #9F4010;
+	 font-weight: bold; 
+	 } 
+.greylabel {
+    font-size: 12px; 
+	 font-family: tahoma,sans-serif;
+	 color: #817F80;
+}
+.blackcaption{
+    font-size: 14px; 
+	 font-family: tahoma, sans-serif,arial;
+	 color: #000000;
+	 font-weight: bold;
+}
+.browcaption{
+    font-size: 12px; 
+	 font-family: tahoma, sans-serif,arial;
+	 font-weight: bold;
+	 color: #7B2E02;
+}
+.pinkcaption{
+    font-family:tahoma,sans-serif;
+	 font-size:12px;
+	 color: #DC8095;
+	 font-weight: bold; 
+ }
+  
+.footer{
+    font-size: 10px;
+	 font-family: tahoma, sans-serif,arial;
+	 color: #817F80;
+}
+A.menu {
+	text-decoration: none;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #CC0000;
+	font-style: normal;
+}
+A.menu:visited {
+	text-decoration: none;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-style: normal;
+}
+
+A.menu:hover {
+	text-decoration: none;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-style: normal;
+}
+
+A.menu:link	{
+	text-decoration: none;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-style: normal;
+}
+.explain
+{
+	font-family:tahoma,sans-serif;
+	font-size:12px;
+	color: #D3DDE6;
+	
+}
+
+A.submenu {
+	text-decoration: none;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-style: bold;
+}
+A.submenu:visited {
+	text-decoration: none;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-style: bold;
+}
+
+A.submenu:hover {
+	text-decoration: underline;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-style: bold;
+}
+
+A.submenu:link	{
+	text-decoration: none;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-style: bold;
+}
+
+.menutitle
+{
+	text-decoration: none;
+	font-family:tahoma,sans-serif;
+	font-size:15px;
+	color: #FFFFFF;
+	font-style: bold;
+}
+
+A.leftmenu {
+	text-decoration: none;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #A7A7A7;
+	font-style: normal;
+}
+A.leftmenu:visited {
+	text-decoration: none;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #A7A7A7;
+	font-style: normal;
+}
+
+A.leftmenu:hover {
+	text-decoration: none;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-style: normal;
+}
+
+A.leftmenu:link	{
+	text-decoration: none;
+	font-family: tahoma, sans-serif,arial;
+	font-size: 12px;
+	color: #A7A7A7;
+	font-style: normal;
+}
